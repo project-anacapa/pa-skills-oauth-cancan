@@ -1,2 +1,22 @@
 # pa-skills-oauth-cancan
 Results of a spike for "proof of concept" and "example" of oauth via facebook, google + cancan for permission levels.
+
+(1) Generate initial scaffolding.   Use postgres so that we can run on Heroku.
+
+```
+rails new oauth-cancan-demo --database=postgresql
+```
+
+(2) Start postgres on your local machine, and generate the local database.
+
+```
+bin/rake db:create db:migrate
+```
+
+(3) Run locally to test:
+
+```
+rails s
+```
+
+
