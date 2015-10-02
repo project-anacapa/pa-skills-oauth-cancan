@@ -19,10 +19,15 @@ Rails.application.routes.draw do
 
 
 
-
   get 'instructor/index'
   get 'instructor/menu_option_1' => 'instructor#menu_option_1'
   get 'instructor/menu_option_2' => 'instructor#menu_option_2'
+
+
+
+  get 'admin/index'
+  get 'admin/user_management' => 'admin#user_management'
+  get 'admin/menu_option_2' => 'admin#menu_option_2'
 
 
 
