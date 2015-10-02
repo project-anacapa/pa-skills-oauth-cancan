@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'student/index'
 
   get 'welcome/index'
 
@@ -11,6 +10,14 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+
+
+  get 'student/index'
+  get 'student/menu_option_1' => 'student#menu_option_1'
+  get 'student/menu_option_2' => 'student#menu_option_2'
+
+
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
