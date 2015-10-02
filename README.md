@@ -32,3 +32,12 @@ Similar steps could be taken for other OAuth providers such as Github, Twitter ,
 rails generate controller welcome index
 ```
 
+(6) Generate scaffolding for index page student. Then add controller actions and views for menu option 1 and menu option 2 + navigation.
+
+```
+rails generate controller student index
+```
+
+
+
+

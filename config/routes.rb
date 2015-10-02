@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,6 +16,13 @@ Rails.application.routes.draw do
   get 'student/index'
   get 'student/menu_option_1' => 'student#menu_option_1'
   get 'student/menu_option_2' => 'student#menu_option_2'
+
+
+
+
+  get 'instructor/index'
+  get 'instructor/menu_option_1' => 'instructor#menu_option_1'
+  get 'instructor/menu_option_2' => 'instructor#menu_option_2'
 
 
 
