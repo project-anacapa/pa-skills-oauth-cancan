@@ -26,8 +26,9 @@ rails s
 
 Similar steps could be taken for other OAuth providers such as Github, Twitter ,etc.
 
-(5) Create default home page, and add nav bar to it.
+(5) Create default home page, and add nav bar to it. See http://guides.rubyonrails.org/getting_started.html steps 4.2 and 4.3. Also look at nav bar in views/layouts/application.html.erb
 
 ```
 rails generate controller welcome index
 ```
+
