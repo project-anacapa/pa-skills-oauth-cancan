@@ -21,7 +21,8 @@ rails s
 
 (4) Create Facebook and Google Applications in the Facebook and Google Developer Consoles.
 
-* For Facebook, see: README_FACEBOOK.md
-* For Google, see: README_GOOGLE.md
+* For Facebook, see: [README_FACEBOOK.md](/README_FACEBOOK.md)
+* For Google, see: [README_GOOGLE.md](/README_GOOGLE.md)
 
+Similar steps could be taken for other OAuth providers such as Github, Twitter ,etc.
 
