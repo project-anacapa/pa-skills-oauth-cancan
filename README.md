@@ -19,4 +19,9 @@ bin/rake db:create db:migrate
 rails s
 ```
 
+(4) Create Facebook and Google Applications in the Facebook and Google Developer Consoles.
+
+* For Facebook, see: README_FACEBOOK.md
+* For Google, see: README_GOOGLE.md
+
 
