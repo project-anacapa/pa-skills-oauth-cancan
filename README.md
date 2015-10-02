@@ -26,3 +26,8 @@ rails s
 
 Similar steps could be taken for other OAuth providers such as Github, Twitter ,etc.
 
+(5) Create default home page, and add nav bar to it.
+
+```
+rails generate controller welcome index
+```
