@@ -14,7 +14,7 @@
         <% if current_user %>
             <td style="text-align:left; width:30%"><%= current_user.name %></td>
             <td><%= link_to "Profile", current_user %></td>
-            <td style="text-align:right;"><%= link_to "Logout", destroy_user_session_path, method: :delete %></td>
+            <td style="text-align:right;"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></td>
         <% else %>
             <td style="text-align:right;"><%= link_to "Login", "/"  %></td>
         <% end %>
