@@ -134,20 +134,38 @@ rails g model identity user:references provider:string uid:string
 
 This of course requires a rake db:migrate, which we did.  
 
-(10) Added these lines to config/initializers/devise.rb
+(10) Add a `before_action` of `:authenticate_user!` into  `welcome_controller.rb` to throw folks into the login screen:
+
+```
+class WelcomeController < ApplicationController
+
+  before_action :authenticate_user!
+
+  def index
+  end
+end
+
+```
+
+This has the effect of bringing up a login screen where they enter username/password.
+That's not what we want.  We want them to login with Facebook or Google.  So, we'll need to so something about that.
+
+
+
+(11) Added these lines to config/initializers/devise.rb
 
 ```
 config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH2_APP_ID'], ENV['GOOGLE_OAUTH2_APP_SECRET'], scope: "email,profile,offline", prompt: "consent"
 config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], scope: "email"
 ```
 
-(11) Added dotenv to our Gemfile
+(12) Added dotenv to our Gemfile
 ```
 gem 'dotenv-rails', :groups => [:development, :test]
 ```
 See https://github.com/bkeepers/dotenv
 
-(12) Add .env to .gitignore and create .env with values of app ids and secrets for facebook and google
+(13) Add .env to .gitignore and create .env with values of app ids and secrets for facebook and google
 ```
 export GOOGLE_OAUTH2_APP_ID=dsfadfdsagdsh
 export GOOGLE_OAUTH2_APP_SECRET=jyhgfsfd
@@ -158,7 +176,7 @@ export FACEBOOK_APP_SECRET=zajnfdjnf
 The actual values for the environment variables come from the developer console for facebook and google (see step 4)
 
 
-(13) Open up app/models/user.rb and add :omniauthable to your devise line and remove :validatable:
+(14) Open up app/models/user.rb and add :omniauthable to your devise line and remove :validatable:
 ```
 devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
@@ -169,10 +187,3 @@ it should successfully authenticate with either facebook or google, but you will
 ```
 The action 'facebook' could not be found for Devise::OmniauthCallbacksController
 ```
-
-
-
-
-
-
-
