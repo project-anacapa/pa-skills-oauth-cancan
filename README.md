@@ -187,3 +187,43 @@ it should successfully authenticate with either facebook or google, but you will
 ```
 The action 'facebook' could not be found for Devise::OmniauthCallbacksController
 ```
+
+(15) We added this code to `app/models/identity.rb`
+
+```
+class Identity < ActiveRecord::Base
+  belongs_to :user
+  validates_presence_of :uid, :provider
+  validates_uniqueness_of :uid, :scope => :provider
+
+  def self.find_for_oauth(auth)
+    find_or_create_by(uid: auth.uid, provider: auth.provider)
+  end
+end
+```
+
+(16) In order to be able to send emails, we need an email provider.
+
+Sendgrid is an Heroku supported email sending service.
+
+```
+heroku addons:create sendgrid:starter
+```
+
+This will give you, under your CONFIG VARS on your heroku dashboard, a `SENDGRID_USERNAME` and a `SENDGRID_PASSWORD`.
+
+The tutorial suggested Gmail, but we'll use sendgrid instead, and add this code to config/environment.rb so that
+it is there for all three environments (development, test, production).
+
+
+```
+ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+}
+```
