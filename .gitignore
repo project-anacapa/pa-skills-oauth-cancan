@@ -19,3 +19,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# .env contains app secrets and ids for oauth configuration, database config, etc.
+.env

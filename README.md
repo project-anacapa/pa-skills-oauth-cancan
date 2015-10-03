@@ -134,3 +134,45 @@ rails g model identity user:references provider:string uid:string
 
 This of course requires a rake db:migrate, which we did.  
 
+(10) Added these lines to config/initializers/devise.rb
+
+```
+config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH2_APP_ID'], ENV['GOOGLE_OAUTH2_APP_SECRET'], scope: "email,profile,offline", prompt: "consent"
+config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], scope: "email"
+```
+
+(11) Added dotenv to our Gemfile
+```
+gem 'dotenv-rails', :groups => [:development, :test]
+```
+See https://github.com/bkeepers/dotenv
+
+(12) Add .env to .gitignore and create .env with values of app ids and secrets for facebook and google
+```
+export GOOGLE_OAUTH2_APP_ID=dsfadfdsagdsh
+export GOOGLE_OAUTH2_APP_SECRET=jyhgfsfd
+export FACEBOOK_APP_ID=asdkjfbdskjbg
+export FACEBOOK_APP_SECRET=zajnfdjnf
+
+```
+The actual values for the environment variables come from the developer console for facebook and google (see step 4)
+
+
+(13) Open up app/models/user.rb and add :omniauthable to your devise line and remove :validatable:
+```
+devise :omniauthable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable
+```
+
+Try it now. You should be able to see Login with facebook / google. If you click them,
+it should successfully authenticate with either facebook or google, but you will get this error:
+```
+The action 'facebook' could not be found for Devise::OmniauthCallbacksController
+```
+
+
+
+
+
+
+

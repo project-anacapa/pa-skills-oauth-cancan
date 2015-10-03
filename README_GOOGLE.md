@@ -10,7 +10,8 @@ Create a new application/web application.
 
 Under authorized JavaScript origins, use: https://project-awesome-us.herokuapp.com
 
-Under Callback URL, use: https://project-awesome-us.herokuapp.com/auth/google/callback
+Under Callback URL, use: http://localhost:3000/users/auth/google_oauth2/callback, and
+http://pa-skills-oauth-cancan.herokuapp.com/users/auth/google_oauth2/callback for heroku.
 
 
 
