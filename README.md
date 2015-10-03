@@ -134,3 +134,18 @@ rails g model identity user:references provider:string uid:string
 
 This of course requires a rake db:migrate, which we did.  
 
+(10) Add a `before_action` of `:authenticate_user!` into  `welcome_controller.rb` to throw folks into the login screen:
+
+```
+class WelcomeController < ApplicationController
+
+  before_action :authenticate_user!
+
+  def index
+  end
+end
+
+```
+
+This has the effect of bringing up a login screen where they enter username/password.  That's not what we want.  We want them to login with Facebook or Google.  So, we'll need to so something about that.
+
