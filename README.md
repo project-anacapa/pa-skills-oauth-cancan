@@ -1,6 +1,24 @@
 # pa-skills-oauth-cancan
 Results of a spike for "proof of concept" and "example" of oauth via facebook, google + cancan for permission levels.
 
+# Tutorials we used
+
+
+For basic Rails stuff:
+
+* http://guides.rubyonrails.org/getting_started.html
+
+For OAuth:
+
+* http://willschenk.com/setting-up-devise-with-twitter-and-facebook-and-other-omniauth-schemes-without-email-addresses/
+* http://sourcey.com/rails-4-omniauth-using-devise-with-twitter-facebook-and-linkedin/
+
+For Cancan
+
+* TBD
+
+# Steps we followed (at a high level)
+
 (1) Generate initial scaffolding.   Use postgres so that we can run on Heroku.
 
 ```
