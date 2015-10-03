@@ -123,6 +123,7 @@ Some setup you must do manually if you haven't yet:
 rails g devise:views
 ```
 
+We got a bunch of views under views/devise that we'll come back to later.  We'll probably keep some, and throw some away.  Not sure yet.
 
 (9) Generate scaffolding for user model
 ```
@@ -131,4 +132,5 @@ rails g migration add_name_to_users name:string
 rails g model identity user:references provider:string uid:string
 ```
 
+This of course requires a rake db:migrate, which we did.  
 
