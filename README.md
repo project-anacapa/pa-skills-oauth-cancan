@@ -227,3 +227,16 @@ ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto => true
 }
 ```
+
+(17) We replaced this line in routes.rb
+
+
+```
+devise_for :users
+```
+
+with this line
+
+```
+devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+```
