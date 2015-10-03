@@ -16,7 +16,7 @@
             <td><%= link_to "Profile", current_user %></td>
             <td style="text-align:right;"><%= button_to('Logout', destroy_user_session_path, :method => :delete) %></td>
         <% else %>
-            <td style="text-align:right;"><%= button_to "Login", "/"  %></td>
+            <td style="text-align:right;"><%= button_to("Login", new_user_session_path, :method => :get) %></td>
         <% end %>
       </tr>
       </table>
