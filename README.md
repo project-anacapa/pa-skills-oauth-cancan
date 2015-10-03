@@ -65,4 +65,72 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 ```
 
+(8) Generate scaffolding for devise
+```
+rails generate devise:install
+rails generate devise user
+rails g migration add_name_to_users name:string
+rails g model identity user:references provider:string uid:string
+```
+
+This produced the following output which suggests some things we may need to do:
+
+```
+
+Some setup you must do manually if you haven't yet:
+
+  1. Ensure you have defined default url options in your environments files. Here
+     is an example of default_url_options appropriate for a development environment
+     in config/environments/development.rb:
+
+       config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+     In production, :host should be set to the actual host of your application.
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root to: "home#index"
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+  4. If you are deploying on Heroku with Rails 3.2 only, you may want to set:
+
+       config.assets.initialize_on_precompile = false
+
+     On config/application.rb forcing your application to not access the DB
+     or load models when precompiling your assets.
+
+  5. You can copy Devise views (for customization) to your app by running:
+
+       rails g devise:views
+
+===============================================================================
+```
+
+(8) Do some of things that were suggested:
+
+* We added the line suggested in (1) about mailer.  We also added a line for pa-skills-oauth-cancacan.herokuapp.com to the production environment file, even though we're not sure if that was the right thing to do yet.
+* We added the flash messages (item 3) to our app/views/layouts/application.html.erb
+* Item 2 was already done.  Item (4) doesn't apply.
+* We are gonna try item 5 to see what happens.
+
+```
+rails g devise:views
+```
+
+We got a bunch of views under views/devise that we'll come back to later.  We'll probably keep some, and throw some away.  Not sure yet.
+
+(9) Generate scaffolding for user model
+```
+rails generate devise user
+rails g migration add_name_to_users name:string
+rails g model identity user:references provider:string uid:string
+```
+
+This of course requires a rake db:migrate, which we did.  
 
