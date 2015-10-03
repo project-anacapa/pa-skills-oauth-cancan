@@ -56,6 +56,13 @@ rails generate controller welcome index
 rails generate controller student index
 ```
 
+(7) Add gems needed for devise, omniauth, and specific OAuth providers:
 
+```
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+```
 
 
