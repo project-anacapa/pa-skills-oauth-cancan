@@ -3,12 +3,10 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = '~~~~~'
   TEMP_EMAIL_REGEX = /\A~~~~~/
 
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :confirmable, :validatable,
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :omniauthable
 
+
+  devise :database_authenticatable, :registerable, :trackable, :omniauthable
 
   #validates_format_of :email, :with => /@/ , on: :update
 
@@ -35,7 +33,6 @@ class User < ActiveRecord::Base
       if user.nil?
         user = User.new(
             name: auth.extra.raw_info.name,
-            #username: auth.info.nickname || auth.uid,
             email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
             password: Devise.friendly_token[0,20]
         )
