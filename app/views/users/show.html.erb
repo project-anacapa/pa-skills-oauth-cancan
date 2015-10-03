@@ -2,3 +2,8 @@
   <li>Name: <%= @user.name %></li>
   <li>Email: <%= @user.email %></li>
 </ol>
+
+
+<%- ['facebook','google_oauth2'].each do |provider| %>
+    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider) %><br />
+<% end -%>
