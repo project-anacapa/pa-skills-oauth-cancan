@@ -4,6 +4,15 @@
 </ol>
 
 
+<h2>Identities for this user:</h2>
+
+<ul>
+  <%= @user.identities.find_each do | i | %>
+  <li>  <%=  i.provider %>, <%=  i.uid %> </li>
+  <% end %>
+</ul>
+
+
 <%- ['facebook','google_oauth2'].each do |provider| %>
     <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider) %><br />
 <% end -%>

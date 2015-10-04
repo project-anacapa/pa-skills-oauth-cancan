@@ -1,16 +1,8 @@
 class User < ActiveRecord::Base
 
-  TEMP_EMAIL_PREFIX = '~~~~~'
-  TEMP_EMAIL_REGEX = /\A~~~~~/
-
-
-
+  has_many :identities
 
   devise :database_authenticatable, :registerable, :trackable, :omniauthable
-
-  #validates_format_of :email, :with => /@/ , on: :update
-
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -21,19 +13,30 @@ class User < ActiveRecord::Base
     # to prevent the identity being locked with accidentally created accounts.
     # Note that this may leave zombie accounts (with no associated identity) which
     # can be cleaned up at a later date.
+
     user = signed_in_resource ? signed_in_resource : identity.user
 
-    # Create the user if needed
-    if user.nil?
+    email = auth.info.email.nil? ? "" : auth.info.email
 
-      email = auth.info.email
-      user = User.where(:email => email).first if email
+    # if there's already a user with
+    if user and user.email.blank? and auth.info.email
+        user.email = email
+        user.save!
+    end
+
+    # Create the user if needed
+
+    if user.nil?
+      # do we have a user with a matching email already?
+      # if so, just use that one.
+
+      user = User.where(:email => email).first if auth.info.email
 
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
             name: auth.extra.raw_info.name,
-            email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+            email: email,
             password: Devise.friendly_token[0,20]
         )
         user.save!
