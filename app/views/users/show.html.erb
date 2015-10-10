@@ -1,21 +1,8 @@
-<ol>
-  <li>Name: <%= @user.name %></li>
-  <li>Email: <%= @user.email %></li>
-</ol>
-
-
-
-<h3>Identities for this user:</h3>
-
 <table class="scaffold-table">
-  <tr>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th>Provider</th>
-    <th>Uid</th>
-  </tr>
-  <%= render partial: 'users/identities', :locals => { :user => @user, :columns => 4 }  %>
+  <%= render partial: 'user_headings', :locals => { :user => @user } %>
+  <%= render partial: 'user_details', :locals => { :user => @user } %>
 </table>
+
 
 
 <h3>To link other accounts with this one:</h3>
@@ -24,3 +11,8 @@
     <li><%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider) %></li>
 <% end -%>
 </ul>
+
+
+<% if can? :manage, User %>
+    <li><%= link_to 'Manage Users', users_path %></li>
+<% end %>

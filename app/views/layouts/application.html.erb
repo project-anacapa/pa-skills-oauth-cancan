@@ -15,21 +15,15 @@
           <%= link_to 'Home', root_path, class: 'navbar-brand' %>
         </div>
 
-        <div class="navbar-left">
+        <!-- <div class="navbar-left">
           <ul class="nav navbar-nav">
-            <% if can? :create, Exercise %>
-                <li><%= link_to 'Add Exercise', new_exercise_path %></li>
-            <% end %>
-            <% if can? :index, Exercise %>
-                <li><%= link_to 'List Exercises', exercises_path %></li>
-            <% end %>
+
           </ul>
-        </div>
+        </div> -->
         <div class="navbar-right">
           <ul class="nav navbar-nav">
             <% if current_user %>
                 <li><%= current_user.name %></li>
-                <li><%= link_to "Profile", current_user %></li>
                 <li><%= button_to('Logout', destroy_user_session_path, :method => :delete) %></li>
             <% else %>
                 <td style="text-align:right;"><%= button_to("Login", new_user_session_path, :method => :get) %></td>

@@ -1,6 +1,6 @@
 <h1>Listing exercises</h1>
 
-<table>
+<table class="scaffold-table">
   <thead>
     <tr>
       <th>Title</th>
@@ -14,9 +14,15 @@
       <tr>
         <td><%= exercise.title %></td>
         <td><%= exercise.content %></td>
-        <td><%= link_to 'Show', exercise %></td>
-        <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
-        <td><%= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :show, exercise %>
+           <td><%= link_to 'Show', exercise %></td>
+        <% end %>
+        <% if can? :edit, exercise %>
+            <td><%= link_to 'Edit', edit_exercise_path(exercise) %></td>
+        <% end %>
+        <% if can? :destroy, exercise %>
+            <td><%= link_to 'Destroy', exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +30,7 @@
 
 <br>
 
-<%= link_to 'New Exercise', new_exercise_path %>
+
+<% if can? :create, Exercise %>
+    <li><%= link_to 'New Exercise', new_exercise_path %></li>
+<% end %>

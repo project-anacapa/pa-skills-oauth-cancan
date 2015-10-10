@@ -7,14 +7,20 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-
-
     if user.role?(:admin)
-       can :manage, :all
-    elsif user.role?(:instructor)
+      can :manage, :all
+    end
+
+    if user.role?(:instructor)
        can :manage, Exercise
-    elsif user.role?(:student)
-       can :manage, user # user, not User.  Can only manage herself/himself
+    end
+
+    if user.role?(:logged_in_user)
+       can [:index,:show], user # user, not User.  Can only manage herself/himself
+    end
+
+    if user.role?(:student)
+       can [:index,:show], Exercise
     end
 
     #

@@ -19,30 +19,12 @@ Rails.application.routes.draw do
 
 
 
-  get 'student/index'
-  get 'student/menu_option_1' => 'student#menu_option_1'
-  get 'student/menu_option_2' => 'student#menu_option_2'
-
-
-
-  get 'instructor/index'
-  get 'instructor/menu_option_1' => 'instructor#menu_option_1'
-  get 'instructor/menu_option_2' => 'instructor#menu_option_2'
-
-
-
-  get 'admin/index'
-  get 'admin/user_management' => 'admin#user_management'
-  get 'admin/menu_option_2' => 'admin#menu_option_2'
-
-
-
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  resources :users, only: [:index]
+  resources :users, only: [:index,:edit,:update,:show, :destroy ]
 
-  get 'users/:id' => 'users#show', as: :user
+  # get 'users/:id' => 'users#show', as: :user
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

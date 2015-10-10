@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/:id.:format
   def update
+    puts "******************* user update ******************"
     authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
@@ -64,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    accessible = [:name, :email] # extend with your own params
+    accessible = [:name, :email, :is_admin, :is_instructor] # extend with your own params
     accessible << [:password, :password_confirmation] unless params[:user][:password].blank?
     params.require(:user).permit(accessible)
   end

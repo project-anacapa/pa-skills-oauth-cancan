@@ -10,5 +10,10 @@
   <%= @exercise.content %>
 </p>
 
-<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+<p>
+<% if can? :edit, @exercise %>
+    <%= link_to 'Edit', edit_exercise_path(@exercise) %>
+<% end %>
+</p>
+
 <%= link_to 'Back', exercises_path %>

@@ -1,0 +1,31 @@
+<tr class="user-index-row">
+  <td><%= user.id %></td>
+  <td><%= user.email %></td>
+  <td><%= user.sign_in_count %></td>
+  <td><%= user.name %></td>
+  <td><%= user.is_admin %></td>
+  <td><%= user.is_instructor %></td>
+
+  <td class="scaffold-action">
+    <% if can? :show, user %>
+        <%= link_to 'Show', user %>
+    <% end %> &nbsp;
+  </td>
+
+  <td class="scaffold-action">
+    <% if can? :edit, user %>
+        <%= link_to 'Edit', edit_user_path(user) %>
+    <% end %> &nbsp;
+  </td>
+
+  <td class="scaffold-action">
+    <% if can? :destroy, user %>
+        <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end  %>
+  </td>
+</tr>
+
+<% if not user.identities.empty? %>
+    <tr><th class="user-index-row" colspan="2">&nbsp;</th><th>provider</th><th colspan="4">uid</th></tr>
+    <%= render partial: 'users/identities', :locals => { :user => user, :columns => 7 } %>
+<% end %>

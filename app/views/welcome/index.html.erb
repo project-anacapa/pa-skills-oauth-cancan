@@ -1,6 +1,38 @@
-<h1> Main Menu </h1>
-<ol>
-	<li><%= link_to "Student Menu", student_index_path %></li>
-	<li><%= link_to "Instructor Menu", instructor_index_path %></li>
-    <li><%= link_to "Admin Menu", admin_index_path %></li>
-</ol>
+
+<div id="main-menu">
+
+  <h2>Things to try:</h2>
+   <ul>
+     <li><%= link_to 'List Exercises', exercises_path %></li>
+   </ul>
+
+  <% if current_user && current_user.role?(:logged_in_user) %>
+  <h2>More stuff you can do when logged in:</h2>
+  <ul>
+    <li><%= link_to "My User Profile", current_user %></li>
+  </ul>
+  <% end %>
+
+  <% if current_user && current_user.role?(:instructor) %>
+  <h2>Instructor Options:</h2>
+  <ul>
+    <% if can? :create, Exercise %>
+        <li><%= link_to 'Add Exercise', new_exercise_path %></li>
+    <% end %>
+    <% if can? :modify, Exercise %>
+        <li><%= link_to 'List/Edit/Delete Exercises', exercises_path %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <% if current_user && current_user.role?(:admin) %>
+  <h2>Admin Options:</h2>
+  <ul>
+    <% if can? :index, User %>
+        <li><%= link_to 'Manage Users', users_path %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+</div>
+
