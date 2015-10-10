@@ -5,17 +5,18 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    authorize! :show, @user
   end
 
 
   # GET /users/:id/edit
   def edit
-    #authorize! :update, @user
+    authorize! :update, @user
   end
 
   # PATCH/PUT /users/:id.:format
   def update
-    #authorize! :update, @user
+    authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
 
   # GET/PATCH /users/:id/finish_signup
   def finish_signup
-    #authorize! :update, @user
+    authorize! :update, @user
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         @user.skip_reconfirmation!

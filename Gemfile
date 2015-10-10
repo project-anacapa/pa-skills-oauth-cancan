@@ -55,3 +55,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
 # Anything else goes below this line
+
+gem 'cancancan', '~> 1.10'
+
+#hirb is for nice ascii tables.  Used in super_admin.rake
+gem 'hirb'

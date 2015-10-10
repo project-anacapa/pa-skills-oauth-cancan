@@ -51,4 +51,21 @@ class User < ActiveRecord::Base
     user
   end
 
+  def role?(role_name)
+    puts "*************************"
+    puts "role_name=",role_name
+    puts "*************************"
+    case role_name
+      when :admin
+        puts "is_admin?=",is_admin?
+        is_admin?
+      when :instructor
+        is_instructor?
+      when :student
+        self.id != nil
+      when :guest
+        true
+    end
+  end
+
 end

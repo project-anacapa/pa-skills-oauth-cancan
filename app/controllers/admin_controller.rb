@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
+
   def index
+
   end
   def user_management
   end
