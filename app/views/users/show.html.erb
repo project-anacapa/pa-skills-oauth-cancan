@@ -4,15 +4,23 @@
 </ol>
 
 
-<h2>Identities for this user:</h2>
 
+<h3>Identities for this user:</h3>
+
+<table class="scaffold-table">
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>Provider</th>
+    <th>Uid</th>
+  </tr>
+  <%= render partial: 'users/identities', :locals => { :user => @user, :columns => 4 }  %>
+</table>
+
+
+<h3>To link other accounts with this one:</h3>
 <ul>
-  <%= @user.identities.find_each do | i | %>
-  <li>  <%=  i.provider %>, <%=  i.uid %> </li>
-  <% end %>
-</ul>
-
-
 <%- ['facebook','google_oauth2'].each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider) %><br />
+    <li><%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(:user, provider) %></li>
 <% end -%>
+</ul>

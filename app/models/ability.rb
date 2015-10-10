@@ -11,8 +11,10 @@ class Ability
 
     if user.role?(:admin)
        can :manage, :all
+    elsif user.role?(:instructor)
+       can :manage, Exercise
     elsif user.role?(:student)
-       can :manage, user
+       can :manage, user # user, not User.  Can only manage herself/himself
     end
 
     #

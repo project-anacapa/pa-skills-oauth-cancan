@@ -1,0 +1,5 @@
+
+
+  <%= user.identities.find_each do | i | %>
+      <tr><td colspan="2">&nbsp;</td><td><%=  i.provider %></td><td colspan="<%= columns-3  %>"><%=  i.uid %> </td></tr>
+  <% end %>

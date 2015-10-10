@@ -7,25 +7,50 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<nav id="navigation-bar">
-      <table style="width:100%;">
-      <tr>
-        <td style="text-align:left; width:60%"><a href="/">Home</a></td>
-        <% if current_user %>
-            <td style="text-align:left; width:30%"><%= current_user.name %></td>
-            <td><%= link_to "Profile", current_user %></td>
-            <td style="text-align:right;"><%= button_to('Logout', destroy_user_session_path, :method => :delete) %></td>
-        <% else %>
-            <td style="text-align:right;"><%= button_to("Login", new_user_session_path, :method => :get) %></td>
-        <% end %>
-      </tr>
-      </table>
+	<nav id="navigation-bar" class="navbar navbar-inverse">
+
+      <div class="container">
+
+        <div class="navbar-header">
+          <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+        </div>
+
+        <div class="navbar-left">
+          <ul class="nav navbar-nav">
+            <% if can? :create, Exercise %>
+                <li><%= link_to 'Add Exercise', new_exercise_path %></li>
+            <% end %>
+            <% if can? :index, Exercise %>
+                <li><%= link_to 'List Exercises', exercises_path %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <% if current_user %>
+                <li><%= current_user.name %></li>
+                <li><%= link_to "Profile", current_user %></li>
+                <li><%= button_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+            <% else %>
+                <td style="text-align:right;"><%= button_to("Login", new_user_session_path, :method => :get) %></td>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
 	</nav>
-   <div id="flash-messages-div">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-   </div>
-<%= yield %>
+
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>">
+            <%= value %>
+          </div>
+      <% end %>
+      <%= yield %>
+    </div>
+
+
 
 </body>
 </html>

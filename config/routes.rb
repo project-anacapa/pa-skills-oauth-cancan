@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :exercises
+
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
@@ -37,6 +39,8 @@ Rails.application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+
+  resources :users, only: [:index]
 
   get 'users/:id' => 'users#show', as: :user
 
